@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Adam Lee",
   "license": "MIT",
+  "bin": {
+    "codenow": "index.js"
+  },
   "scripts": {
     "test": "ospec",
     "lint": "eslint ."
