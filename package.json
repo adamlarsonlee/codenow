@@ -6,7 +6,7 @@
   "author": "Adam Lee",
   "license": "MIT",
   "bin": {
-    "codenow": "./src/index.js"
+    "codenow": "index.js"
   },
   "scripts": {
     "test": "ospec",
