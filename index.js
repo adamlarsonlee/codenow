@@ -27,7 +27,7 @@ if (program.dir) {
   const repository = path.join(settings.get('dir'), program.args[0]);
   if (fs.existsSync(repository)) {
     console.log(chalk.green(`found ${program.args[0]} in ${repository}`));
-    exec(`powershell ${path.join(__dirname, 'start-powershell.ps1')} "${repository}"`);
+    exec(`powershell ./start-powershell.ps1 "${repository}"`);
     exec(`code ${repository}`);
   } else {
     console.log(chalk.red(`could not access ${repository}`));
