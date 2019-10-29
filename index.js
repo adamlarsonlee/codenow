@@ -16,7 +16,11 @@ program
 
 if (program.dir) {
   if (program.dir === true) {
-    console.log(chalk.green(`currently using ${settings.get('dir')}`));
+    if (settings.get('dir')) {
+      console.log(chalk.green(`currently using ${settings.get('dir')}`));
+    } else {
+      console.log(chalk.red('dir is not set'));
+    }
   } else if (fs.existsSync(program.dir)) {
     settings.set('dir', program.dir);
     console.log(chalk.green(`dir set to ${program.dir}`));
