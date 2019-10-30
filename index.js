@@ -7,14 +7,15 @@ const path = require('path');
 const program = require('commander');
 const userSettings = require('user-settings');
 
-program.version('0.0.1');
+program.version('0.0.2');
 const settings = userSettings.file('.codenow');
 
 program
   .option('-d, --dir [directory]', 'set repositories directory')
+  .option('-l, --list', 'list repository names')
   .parse(process.argv);
 
-if (program.dir) {
+function handleDir(dir) {
   if (program.dir === true) {
     if (settings.get('dir')) {
       console.log(chalk.green(`currently using ${settings.get('dir')}`));
@@ -27,6 +28,29 @@ if (program.dir) {
   } else {
     console.log(chalk.red(`${program.dir} does not exist`));
   }
+}
+
+function handleList() {
+  const dir = settings.get('dir')
+  if (!dir) {
+    console.log(chalk.red('dir is not set'));
+    return;
+  }
+  if (!fs.existsSync(dir)) {
+    console.log(chalk.red(`${program.dir} does not exist`));
+    return;
+  }
+  fs.readdir(dir, (err, items) => {
+    items.forEach((item) => {
+      console.log(chalk.green(item));
+    })
+  });
+}
+
+if (program.dir) {
+  handleDir(program.dir);
+} else if (program.list) {
+  handleList();
 } else {
   const repository = path.join(settings.get('dir'), program.args[0]);
   if (fs.existsSync(repository)) {
