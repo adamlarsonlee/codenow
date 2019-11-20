@@ -12,9 +12,10 @@ const settings = userSettings.file('.codenow');
 
 program
   .option('-d, --dir [directory]', 'set repositories directory')
-  .option('-l, --list', 'list repository names')
   .option('-c, --code', 'open dev environment only')
+  .option('-l, --list', 'list repository names')
   .option('-p, --powershell', 'open powershell only')
+  .option('-r, --repo', 'open repository in powershell')
   .parse(process.argv);
 
 function getDirSetting() {
@@ -57,10 +58,16 @@ function handleList() {
   });
 }
 
+function handleRepo() {
+  exec(`powershell ${path.join(__dirname, 'start-powershell.ps1')} "${settings.get('dir')}"`);
+}
+
 if (program.dir) {
   handleDir(program.dir);
 } else if (program.list) {
   handleList();
+} else if (program.repo) {
+  handleRepo();
 } else {
   const repository = path.join(settings.get('dir'), program.args[0]);
   if (fs.existsSync(repository)) {
