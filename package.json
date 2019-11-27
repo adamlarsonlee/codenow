@@ -2,11 +2,11 @@
   "name": "codenow",
   "version": "1.0.0",
   "description": "VS Code and Powershell Coding CLI",
-  "main": "index.js",
+  "main": "./src/index.js",
   "author": "Adam Lee",
   "license": "MIT",
   "bin": {
-    "codenow": "./index.js"
+    "codenow": "./src/index.js"
   },
   "scripts": {
     "test": "ospec",
@@ -15,11 +15,13 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^3.0.2",
+    "simple-git": "^1.126.0",
     "user-settings": "^0.2.0"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "ospec": "^4.0.1"
   }
 }
