@@ -16,10 +16,10 @@ program.version('0.0.2');
 program
   .option('-d, --dir [directory]', 'set local repositories directory')
   .option('-r, --repo [repository]', 'set remote repository')
-  .option('--clone [repository]', 'clone repo from remote to local')
+  .option('--clone <repository>', 'clone repo from remote to local')
   .option('-l, --list', 'list repository names')
   .option('-c, --code', 'open dev environment only')
-  .option('-p, --powershell', 'open powershell only')
+  .option('-p, --powershell [instances]', 'open powershell only')
   .parse(process.argv);
 
 function handleDir(dir) {
@@ -98,7 +98,11 @@ if (program.dir) {
   if (dirService.exists(repository)) {
     console.log(chalk.green(`found ${program.args[0]} in ${repository}`));
     if (!program.code) {
-      exec(`powershell ${path.join(__dirname, 'start-powershell.ps1')} "${repository}"`);
+      let instances = parseInt(program.powershell, 10);
+      if (Number.isNaN(instances)) { instances = 1; }
+      for (let i = 0; i < instances; i += 1) {
+        exec(`powershell ${path.join(__dirname, 'start-powershell.ps1')} "${repository}"`);
+      }
     }
     if (!program.powershell) {
       exec(`code ${repository}`);
