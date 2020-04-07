@@ -97,14 +97,14 @@ if (program.dir) {
   const repository = path.join(dirService.getSetting(), program.args[0]);
   if (dirService.exists(repository)) {
     console.log(chalk.green(`found ${program.args[0]} in ${repository}`));
-    if (!program.code) {
+    if (program.powershell || (!program.powershell && !program.code)) {
       let instances = parseInt(program.powershell, 10);
       if (Number.isNaN(instances)) { instances = 1; }
       for (let i = 0; i < instances; i += 1) {
         exec(`powershell ${path.join(__dirname, 'start-powershell.ps1')} "${repository}"`);
       }
     }
-    if (!program.powershell) {
+    if (program.code || (!program.powershell && !program.code)) {
       exec(`code ${repository}`);
     }
   } else {
