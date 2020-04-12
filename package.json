@@ -13,6 +13,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "bottlejs": "^1.7.2",
     "chalk": "^4.0.0",
     "commander": "^5.0.0",
     "simple-git": "^1.132.0",
