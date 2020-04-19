@@ -14,6 +14,7 @@ require('./dir-service/dir-service')(bottle);
 require('./program/program')(bottle);
 require('./program/version')(bottle);
 require('./program/command/code')(bottle);
+require('./program/command/dir')(bottle);
 require('./program/command/list')(bottle);
 require('./program/command/shell')(bottle);
 
