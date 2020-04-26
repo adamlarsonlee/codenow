@@ -1,28 +1,28 @@
-function dirService(settingsService, fileService) {
+function getDirService(settings, fs) {
   const setting = 'dir';
 
   function settingExists() {
-    return typeof settingsService.get(setting) !== 'undefined';
+    return typeof settings.get(setting) !== 'undefined';
   }
 
   function getSetting() {
-    return settingsService.get(setting);
+    return settings.get(setting);
   }
 
   function setSetting(dir) {
-    return settingsService.set(setting, dir);
+    return settings.set(setting, dir);
   }
 
   function exists(dir) {
-    if (dir) { return fileService.existsSync(dir); }
-    if (settingExists()) { return fileService.existsSync(getSetting()); }
+    if (dir) { return fs.existsSync(dir); }
+    if (settingExists()) { return fs.existsSync(getSetting()); }
     return false;
   }
 
   function read(callback) {
     if (!settingExists()) { callback('dir not set'); }
     if (!exists()) { callback('dir does not exist');; }
-    if (exists()) { return fileService.readdir(getSetting(), callback); }
+    if (exists()) { return fs.readdir(getSetting(), callback); }
   }
 
   return {
@@ -34,4 +34,6 @@ function dirService(settingsService, fileService) {
   };
 }
 
-module.exports = dirService;
+module.exports = (container) => {
+  container.service('dirService', getDirService, 'settings', 'fs');
+};
