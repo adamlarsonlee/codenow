@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const simpleGit = require('simple-git')();
+
 const {
   chalk,
   path,
@@ -8,7 +10,6 @@ const {
   dirService,
 } = require('./container');
 
-const simpleGit = require('simple-git')();
 const repoService = require('./repo-service/repo-service')(settings);
 
 program
