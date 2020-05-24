@@ -1,6 +1,9 @@
 # codenow
-What we have here is a Node CLI to facilitate managing multiple repositories locally. Right now it it can open VS Code or Powershell in a repository whose root path is set in configuration.
+What we have here is a Node CLI to facilitate managing multiple repositories locally. Currently it supports:
 
-I'll be updating this over time with some extra CLI options and things that I'll post updates to here.
+Windows - VS Code, Powershell
+Xubuntu - VS Code, xfce4-terminal
+
+Right now it simply supports options to open VS Code and a terminal in a repository, where the root directory of your source code is configured.
 
 Currently to install you need to clone the repo and install from the repository using npm install -g.

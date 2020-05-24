@@ -11,7 +11,11 @@ function getDecorator(path, dirService, chalk, exec) {
           let parsedInstances = parseInt(instances, 10);
           if (Number.isNaN(parsedInstances)) { parsedInstances = 1; }
           for (let i = 0; i < parsedInstances; i += 1) {
-            exec(`powershell ${path.join(__dirname, '../../start-powershell.ps1')} "${directory}"`);
+            if (process.platform === 'linux') {
+              exec(`xfce4-terminal --working-directory=${directory}`);
+            } else {
+              exec(`powershell ${path.join(__dirname, '../../start-powershell.ps1')} "${directory}"`);
+            }
           }
         } else {
           console.log(chalk.red(`could not access ${directory}`));

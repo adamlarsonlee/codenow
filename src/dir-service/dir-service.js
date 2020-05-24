@@ -21,7 +21,7 @@ function getDirService(settings, fs) {
 
   function read(callback) {
     if (!settingExists()) { callback('dir not set'); }
-    if (!exists()) { callback('dir does not exist');; }
+    if (!exists()) { callback('dir does not exist'); }
     if (exists()) { return fs.readdir(getSetting(), callback); }
   }
 
