@@ -1,6 +1,6 @@
 function getDecorator(path, dirService, settings, chalk) {
   function parseDirectory(directory) {
-    if (directory[0] === '~') {
+    if (directory && directory[0] === '~') {
       return path.join(process.env.HOME, directory.slice(1));
     }
     return directory;
