@@ -1,25 +1,29 @@
-function getDecorator(path, dirService, settings, chalk) {
-  function parseDirectory(directory) {
-    if (directory && directory[0] === '~') {
-      return path.join(process.env.HOME, directory.slice(1));
+function getDecorator(settings, chalk) {
+  function parseShell(shell) {
+    const lowerShell = shell.toLowerCase();
+    switch (lowerShell.toLowerCase()) {
+      case 'powershell':
+      case 'xfce4':
+        return lowerShell;
+      default:
+        return false;
     }
-    return directory;
   }
 
   function decorate(program) {
     program
-      .command('dir [directory]')
+      .command('set-shell <shell>')
       .description('set local repositories directory')
-      .action((directory) => {
-        const parsedDirectory = parseDirectory(directory);
-        if (!directory) {
-          if (settings.dir.exists()) {
-            console.log(chalk.green(`dir set to ${settings.dir.get()}`));
+      .action((shell) => {
+        const parsedShell = parseShell(shell);
+        if (!parsedShell) {
+          if (dirService.exists()) {
+            console.log(chalk.green(`currently using ${settings.get('dir')}`));
           } else {
             console.log(chalk.red('dir is not set'));
           }
         } else if (dirService.exists(parsedDirectory)) {
-          settings.dir.set(parsedDirectory);
+          dirService.setSetting(parsedDirectory);
           console.log(chalk.green(`dir set to ${parsedDirectory}`));
         } else {
           console.log(chalk.red(`${parsedDirectory} does not exist`));
@@ -35,8 +39,6 @@ module.exports = (container) => {
   container.decorator(
     'program',
     getDecorator(
-      container.container.path,
-      container.container.dirService,
       container.container.settings,
       container.container.chalk,
     ),

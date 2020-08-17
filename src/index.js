@@ -15,7 +15,6 @@ const repoService = require('./repo-service/repo-service')(settings);
 program
   .option('-r, --repo [repository]', 'set remote repository')
   .option('--clone <repository>', 'clone repo from remote to local')
-  .option('-p, --powershell [instances]', 'open powershell only');
 
 program.parse(process.argv);
 

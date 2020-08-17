@@ -8,6 +8,9 @@ require('./fs/fs')(bottle);
 require('./path/path')(bottle);
 
 require('./settings/settings')(bottle);
+require('./settings/setting/dir')(bottle);
+require('./settings/setting/shell')(bottle);
+require('./settings/setting/repo')(bottle);
 
 require('./dir-service/dir-service')(bottle);
 
@@ -16,6 +19,7 @@ require('./program/version')(bottle);
 require('./program/command/code')(bottle);
 require('./program/command/dir')(bottle);
 require('./program/command/list')(bottle);
+require('./program/command/set-shell')(bottle);
 require('./program/command/shell')(bottle);
 
 module.exports = bottle.container;

@@ -1,21 +1,21 @@
 function repoService(settingsService) {
-  const setting = 'repo';
-
-  function settingExists() {
-    return typeof settingsService.get(setting) !== 'undefined';
-  }
+  const SETTING = 'repo';
 
   function getSetting() {
-    return settingsService.get(setting);
+    return settingsService.get(SETTING);
+  }
+
+  function settingExists() {
+    return typeof getSetting() !== 'undefined';
   }
 
   function setSetting(dir) {
-    return settingsService.set(setting, dir);
+    return settingsService.set(SETTING, dir);
   }
 
   return {
-    settingExists,
     getSetting,
+    settingExists,
     setSetting,
   };
 }
