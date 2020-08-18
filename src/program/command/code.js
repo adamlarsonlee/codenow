@@ -1,17 +1,12 @@
-function getDecorator(path, dirService, chalk, exec) {
+function getDecorator(path, settings, exec) {
   function decorate(program) {
     program
       .command('code <respository>')
       .alias('c')
       .description('open the repository in the configured IDE')
       .action((repository) => {
-        const directory = path.join(dirService.getSetting(), repository);
-        if (dirService.exists(directory)) {
-          console.log(chalk.green(`found ${repository} in ${directory}`));
-          exec(`code ${directory}`);
-        } else {
-          console.log(chalk.red(`could not access ${directory}`));
-        }
+        const directory = path.join(settings.dir.get(), repository);
+        exec(`code ${directory}`);
       });
     return program;
   }
@@ -24,8 +19,7 @@ module.exports = (container) => {
     'program',
     getDecorator(
       container.container.path,
-      container.container.dirService,
-      container.container.chalk,
+      container.container.settings,
       container.container.exec,
     ),
   );
