@@ -1,4 +1,4 @@
-function getDecorator(path, dirService, settings, chalk) {
+function getDecorator(path, settings) {
   function parseDirectory(directory) {
     if (directory && directory[0] === '~') {
       return path.join(process.env.HOME, directory.slice(1));
@@ -10,19 +10,14 @@ function getDecorator(path, dirService, settings, chalk) {
     program
       .command('dir [directory]')
       .description('set local repositories directory')
-      .action((directory) => {
-        const parsedDirectory = parseDirectory(directory);
-        if (!directory) {
-          if (settings.dir.exists()) {
-            console.log(chalk.green(`dir set to ${settings.dir.get()}`));
-          } else {
-            console.log(chalk.red('dir is not set'));
-          }
-        } else if (dirService.exists(parsedDirectory)) {
+      .option('-d, --display', 'display directory setting')
+      .option('-s, --set', 'set the default directory')
+      .action((directory, options) => {
+        if (options.display) {
+          settings.dir.display();
+        } else if (options.set) {
+          const parsedDirectory = parseDirectory(directory);
           settings.dir.set(parsedDirectory);
-          console.log(chalk.green(`dir set to ${parsedDirectory}`));
-        } else {
-          console.log(chalk.red(`${parsedDirectory} does not exist`));
         }
       });
     return program;
@@ -36,9 +31,7 @@ module.exports = (container) => {
     'program',
     getDecorator(
       container.container.path,
-      container.container.dirService,
       container.container.settings,
-      container.container.chalk,
     ),
   );
 };

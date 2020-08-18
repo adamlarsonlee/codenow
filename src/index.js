@@ -46,7 +46,7 @@ function handleClone(repository) {
   }
   simpleGit.clone(
     path.join(repoService.getSetting(), repository),
-    path.join(dirService.getSetting(), repository),
+    path.join(settings.dir.get(), repository),
   );
 }
 

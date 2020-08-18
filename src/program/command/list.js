@@ -5,14 +5,6 @@ function getDecorator(dirService, chalk) {
       .alias('l')
       .description('list all local repositories')
       .action(() => {
-        if (!dirService.settingExists()) {
-          console.log(chalk.red('dir is not set'));
-          return;
-        }
-        if (!dirService.exists()) {
-          console.log(chalk.red(`${dirService.getSetting()} does not exist`));
-          return;
-        }
         dirService.read((err, items) => {
           items.forEach((item) => {
             console.log(chalk.green(item));
