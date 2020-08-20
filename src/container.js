@@ -10,6 +10,7 @@ require('./path/path')(bottle);
 require('./settings/settings')(bottle);
 require('./settings/setting/dir')(bottle);
 require('./settings/setting/shell')(bottle);
+require('./settings/setting/code')(bottle);
 
 require('./dir-service/dir-service')(bottle);
 

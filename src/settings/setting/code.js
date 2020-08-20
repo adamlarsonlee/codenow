@@ -1,17 +1,16 @@
 const getDecorator = () => {
-  const setting = 'shell';
+  const setting = 'ide';
 
-  const validate = (shell) => new Promise((resolve, reject) => {
-    if (!shell) {
-      reject(new Error('shell is empty'));
+  const validate = (ide) => new Promise((resolve, reject) => {
+    if (!ide) {
+      reject(new Error('ide is empty'));
     } else {
-      switch (shell) {
-        case 'xfce4':
-        case 'powershell':
+      switch (ide) {
+        case 'vscode':
           resolve();
           break;
         default:
-          reject(new Error('shell type not supported'));
+          reject(new Error('IDE not supported'));
       }
     }
   });
