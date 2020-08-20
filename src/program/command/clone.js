@@ -6,6 +6,7 @@ function getDecorator(path, settings, git, url, chalk) {
       .description('clones the remote repository to the local repositories directory')
       .action((repository) => {
         if (repository) {
+          // TODO: add * method to clone all repos from the root remote
           git
             .silent(true)
             .clone(
