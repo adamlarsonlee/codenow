@@ -7,6 +7,7 @@ const getDecorator = () => {
     } else {
       switch (editor) {
         case 'vscode':
+        case 'atom':
           resolve();
           break;
         default:

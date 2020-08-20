@@ -7,7 +7,7 @@ function getDecorator(path, dirService, settings, chalk, exec) {
       .option('-d, --display', 'display shell setting')
       .option('-s, --set', 'set the default shell')
       .action((repository, instances, options) => {
-        if (options.display) {
+        if (options.display || (!options.set && !repository)) {
           settings.shell.display();
         } else if (options.set) {
           settings.shell.set(repository.toLowerCase());
