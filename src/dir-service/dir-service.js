@@ -6,7 +6,7 @@ function getDirService(settings, fs) {
   }
 
   function read(callback) {
-    return fs.readdir(settings.dir.get(), callback);
+    callback(fs.readdirSync(settings.dir.get()));
   }
 
   return {

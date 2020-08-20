@@ -1,7 +1,7 @@
 function getDecorator(path, settings, exec) {
   function decorate(program) {
     program
-      .command('edit [respository]')
+      .command('edit [respository]', { isDefault: true })
       .alias('e')
       .description('open the repository in the configured editor')
       .option('-d, --display', 'display editor setting')
@@ -25,6 +25,7 @@ function getDecorator(path, settings, exec) {
           }
         }
       });
+  
     return program;
   }
 

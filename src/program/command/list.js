@@ -5,7 +5,7 @@ function getDecorator(dirService, chalk) {
       .alias('l')
       .description('list all local repositories')
       .action(() => {
-        dirService.read((err, items) => {
+        dirService.read((items) => {
           items.forEach((item) => {
             console.log(chalk.green(item));
           });
