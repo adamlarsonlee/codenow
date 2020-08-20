@@ -3,9 +3,9 @@ function getDecorator(path, dirService, settings, chalk, exec) {
     program
       .command('shell [respository] [instances]')
       .alias('s')
+      .description('open the respository in the configured shell')
       .option('-d, --display', 'display shell setting')
       .option('-s, --set', 'set the default shell')
-      .description('open the respository in the configured shell')
       .action((repository, instances, options) => {
         if (options.display) {
           settings.shell.display();
