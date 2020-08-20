@@ -3,7 +3,7 @@ function getDecorator(settings) {
     program
       .command('repo [respository]')
       .alias('r')
-      .description('open the respository in the configured shell')
+      .description('set remote repository root')
       .option('-d, --display', 'display repository setting')
       .option('-s, --set', 'set the default repository')
       .action((repository, options) => {
