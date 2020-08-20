@@ -1,17 +1,18 @@
 function getDecorator(path, settings, exec) {
   function decorate(program) {
     program
-      .command('code [respository]')
-      .alias('c')
-      .description('open the repository in the configured IDE')
-      .option('-d, --display', 'display IDE setting')
-      .option('-s, --set', 'set the default IDE')
+      .command('edit [respository]')
+      .alias('e')
+      .description('open the repository in the configured editor')
+      .option('-d, --display', 'display editor setting')
+      .option('-s, --set', 'set the default editor')
       .action((repository, options) => {
         if (options.display) {
-          settings.ide.display();
+          settings.editor.display();
         } else if (options.set) {
-          settings.ide.set(repository.toLowerCase());
+          settings.editor.set(repository.toLowerCase());
         } else {
+          // TODO: add more editors
           const directory = path.join(settings.dir.get(), repository);
           exec(`code ${directory}`);
         }

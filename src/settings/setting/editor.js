@@ -1,16 +1,16 @@
 const getDecorator = () => {
-  const setting = 'ide';
+  const setting = 'editor';
 
-  const validate = (ide) => new Promise((resolve, reject) => {
-    if (!ide) {
-      reject(new Error('ide is empty'));
+  const validate = (editor) => new Promise((resolve, reject) => {
+    if (!editor) {
+      reject(new Error('editor is empty'));
     } else {
-      switch (ide) {
+      switch (editor) {
         case 'vscode':
           resolve();
           break;
         default:
-          reject(new Error('IDE not supported'));
+          reject(new Error('editor not supported'));
       }
     }
   });

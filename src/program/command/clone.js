@@ -2,8 +2,8 @@ function getDecorator(path, settings, git, url, chalk) {
   function decorate(program) {
     program
       .command('clone [respository]')
-      // .alias('c') // TODO: rename code command to edit
-      .description('clones the remote repository to the local repository')
+      .alias('c')
+      .description('clones the remote repository to the local repositories directory')
       .action((repository) => {
         if (repository) {
           git

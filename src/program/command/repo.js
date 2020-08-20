@@ -2,6 +2,7 @@ function getDecorator(settings) {
   function decorate(program) {
     program
       .command('repo [respository]')
+      .alias('r')
       .description('open the respository in the configured shell')
       .option('-d, --display', 'display repository setting')
       .option('-s, --set', 'set the default repository')
