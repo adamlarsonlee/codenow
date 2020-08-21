@@ -1,16 +1,16 @@
 function getDecorator(settings) {
   function decorate(program) {
     program
-      .command('repo [respository]')
-      .alias('r')
-      .description('set remote repository root')
-      .option('-d, --display', 'display repository setting')
-      .option('-s, --set', 'set the default repository')
-      .action((repository, options) => {
+      .command('token [token]')
+      .alias('t')
+      .description('set remote access token')
+      .option('-d, --display', 'display remote access token')
+      .option('-s, --set', 'set remote access token')
+      .action((token, options) => {
         if (options.display || !options.set) {
-          settings.repo.display();
+          settings.token.display();
         } else if (options.set) {
-          settings.repo.set(repository.toLowerCase());
+          settings.token.set(token);
         }
       });
     return program;
