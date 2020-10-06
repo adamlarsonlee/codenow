@@ -19,7 +19,6 @@ $ codenow --help
 ```
 
 ## Supported (Tested) Operating Systems
-<br>
 
 | Operating System | Option | Supported |
 |------------------|--------|-----------|
