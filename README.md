@@ -1,21 +1,29 @@
 # codenow
 
-What we have here is a Node CLI to facilitate managing multiple repositories locally.
+What we have here is a Node CLI to facilitate managing multiple repositories locally from a single terminal. Right now it supports options to open your IDE and shell of choice in a repository, where the root directory of your source code is configured.
 
-Right now it simply supports options to open VS Code and a terminal in a repository, where the root directory of your source code is configured.
+Built with [Commander](https://github.com/tj/commander.js.) and [Chalk](https://github.com/chalk/chalk)!
 
-Currently to install you need to clone the repo and install from the repository using npm install -g.
+## Installation
 
-The following operatins systems are supported:
+This package isn't published on npm (yet) so for now you can clone the repo and install globally.
 
-## Windows
+```bash
+$ npm i -g
+```
 
-IDE: VS Code
+## Help
 
-Shell: Powershell
+```bash
+$ codenow --help
+```
 
-## Xubuntu
+## Supported (Tested) Operating Systems
+<br>
 
-IDE: VS Code
-
-Shell: xfce4-terminal
+| Operating System | Option | Supported |
+|------------------|--------|-----------|
+|Windows 10        |IDE     |VS Code, Atom |
+|Windows 10        |Shell   |Powershell |
+|Xubuntu           |IDE     |VS Code, Atom |
+|Xubuntu           |Shell   |xfce4-terminal |
