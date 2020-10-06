@@ -17,14 +17,15 @@ function getDecorator(settings, chalk) {
         } else if (settings.remote.get()) {
           const query = `{
             viewer {
-              organization(login: "activated-research-company") {
-                repositories(first: 100) {
-                  edges {
-                    node {
-                      name
-                      url
-                    }
-                  }
+              repositoriesContributedTo(first: 100, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY], includeUserRepositories:true) {
+                totalCount
+                nodes {
+                  name
+                  url
+                }
+                pageInfo {
+                  endCursor
+                  hasNextPage
                 }
               }
             }
@@ -38,11 +39,10 @@ function getDecorator(settings, chalk) {
             body: JSON.stringify({ query }),
           })
             .then((res) => res.json())
-            .then((res) => res.data.viewer.organization.repositories.edges)
-            .then((repos) => repos.map((repo) => ({ name: repo.node.name, url: repo.node.url })))
-            .then((repos) => repos.filter((repo) => repo.url.includes(settings.remote.get())))
+            .then((res) => res.data.viewer.repositoriesContributedTo.nodes)
+            .then((repos) => repos.map((repo) => (({ name: repo.name, url: repo.url }))))
             .then((repos) => repos.forEach((repo) => {
-              console.log(chalk.green(repo.name));
+              console.log(`${chalk.green(repo.name)} ${chalk.blue(repo.url)}`);
             }))
             .catch((error) => console.error(error));
         }
