@@ -6,7 +6,7 @@ function getDecorator(path, settings, git, url, chalk, dirService) {
       git
         .silent(true)
         .clone(
-          url.resolve(settings.repo.get(), `${repo}.git`),
+          url.resolve(settings.remote.get(), `${repo}.git`),
           path.join(settings.dir.get(), repo),
         )
         .then(() => console.log(chalk.green(`cloned ${repo}`)))
@@ -63,7 +63,7 @@ function getDecorator(path, settings, git, url, chalk, dirService) {
                 return repos.filter(notLocal);
               })
               .then((repos) => repos.forEach(clone))
-              // .then(console.log)
+              .then(console.log)
               .catch((error) => console.error(error));
           } else {
             repositories.push(repository);

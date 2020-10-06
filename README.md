@@ -2,7 +2,9 @@
 
 What we have here is a Node CLI to facilitate managing multiple repositories locally from a single terminal. Right now it supports options to open your IDE and shell of choice in a repository, where the root directory of your source code is configured.
 
-Built with [Commander](https://github.com/tj/commander.js.) and [Chalk](https://github.com/chalk/chalk)!
+**Remote features only work with GitHub currently!**
+
+Built happily with [Commander](https://github.com/tj/commander.js.) and [Chalk](https://github.com/chalk/chalk)!
 
 ## Installation
 

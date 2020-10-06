@@ -4,6 +4,6 @@ module.exports = (container) => {
   require('./setting/dir')(container);
   require('./setting/shell')(container);
   require('./setting/editor')(container);
-  require('./setting/repo')(container);
+  require('./setting/remote')(container);
   require('./setting/token')(container);
 };

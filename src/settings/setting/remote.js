@@ -1,9 +1,9 @@
 const getDecorator = () => {
-  const setting = 'repo';
+  const setting = 'remote';
 
-  const validate = (repo) => new Promise((resolve, reject) => {
-    if (!repo) {
-      reject(new Error('repo is empty'));
+  const validate = (remote) => new Promise((resolve, reject) => {
+    if (!remote) {
+      reject(new Error('remote is empty'));
     } else {
       resolve();
     }
