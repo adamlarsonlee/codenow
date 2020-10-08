@@ -3,18 +3,11 @@ const fetch = require('node-fetch');
 function getDecorator(settings, chalk) {
   function decorate(program) {
     program
-      .command('remote [URL]')
+      .command('remotes')
       .alias('r')
-      .description('set remote URL')
-      .option('-d, --display', 'display remote setting')
-      .option('-s, --set', 'set the default remote')
-      .option('-l, --list', 'list remote repositories')
-      .action((remote, options) => {
-        if (options.display || !(options.set || options.list)) {
-          settings.remote.display();
-        } else if (options.set) {
-          settings.remote.set(remote.toLowerCase());
-        } else if (settings.remote.get()) {
+      .description('list remote repositories where you are a contributor')
+      .action(() => {
+        if (settings.token.get()) {
           const query = `{
             viewer {
               repositoriesContributedTo(first: 100, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY], includeUserRepositories:true) {

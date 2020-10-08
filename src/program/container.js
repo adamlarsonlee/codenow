@@ -6,7 +6,7 @@ module.exports = (container) => {
   require('./command/dir')(container);
   require('./command/list')(container);
   require('./command/shell')(container);
-  require('./command/remote')(container);
+  require('./command/remotes')(container);
   require('./command/clone')(container);
   require('./command/token')(container);
 };
