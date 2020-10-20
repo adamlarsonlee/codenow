@@ -6,10 +6,10 @@ function getDecorator(path, settings, git, url, chalk, dirService) {
       git
         .silent(true)
         .clone(
-          url.resolve(settings.remote.get(), `${repo}.git`),
-          path.join(settings.dir.get(), repo),
+          repo.url,
+          path.join(settings.dir.get(), repo.name),
         )
-        .then(() => console.log(chalk.green(`cloned ${repo}`)))
+        .then(() => console.log(chalk.green(`cloned ${repo.name}`)))
         .catch((error) => console.log(chalk.red(error)));
     };
 
@@ -21,17 +21,18 @@ function getDecorator(path, settings, git, url, chalk, dirService) {
         if (repository) {
           const repositories = [];
 
-          if (repository === '*') {
+          if (settings.token.get()) {
             const query = `{
               viewer {
-                organization(login: "activated-research-company") {
-                  repositories(first: 100) {
-                    edges {
-                      node {
-                        name
-                        url
-                      }
-                    }
+                repositoriesContributedTo(first: 100, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY], includeUserRepositories:true) {
+                  totalCount
+                  nodes {
+                    name
+                    url
+                  }
+                  pageInfo {
+                    endCursor
+                    hasNextPage
                   }
                 }
               }
@@ -45,10 +46,9 @@ function getDecorator(path, settings, git, url, chalk, dirService) {
               body: JSON.stringify({ query }),
             })
               .then((res) => res.json())
-              .then((res) => res.data.viewer.organization.repositories.edges)
-              .then((repos) => repos.map((repo) => ({ name: repo.node.name, url: repo.node.url })))
-              .then((repos) => repos.filter((repo) => repo.url.includes(settings.repo.get())))
-              .then((repos) => repos.map((repo) => repo.name))
+              .then((res) => res.data.viewer.repositoriesContributedTo.nodes)
+              .then((repos) => repos.map((repo) => (({ name: repo.name, url: repo.url }))))
+              .then((repos) => repos.filter((repo) => repo.name === repository))
               .then((repos) => {
                 let dirs;
 
@@ -56,14 +56,11 @@ function getDecorator(path, settings, git, url, chalk, dirService) {
                   dirs = locals;
                 });
 
-                const notLocal = (repo) => {
-                  return !dirs.find((dir) => dir === repo);
-                };
+                const notLocal = (repo) => !dirs.find((dir) => dir === repo.name);
 
                 return repos.filter(notLocal);
               })
               .then((repos) => repos.forEach(clone))
-              .then(console.log)
               .catch((error) => console.error(error));
           } else {
             repositories.push(repository);
