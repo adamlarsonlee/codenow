@@ -17,7 +17,7 @@
     "chalk": "^4.0.0",
     "commander": "^5.0.0",
     "node-fetch": "^2.6.1",
-    "simple-git": "^1.132.0",
+    "simple-git": "^3.5.0",
     "user-settings": "^0.2.0"
   },
   "devDependencies": {
